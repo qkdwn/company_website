@@ -19,6 +19,8 @@ const MenuItem = ({ path, label, onClick }) => (
 )
 
 const Navbar = () => {
+    const [language, setLanguage] = useState("ko")
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-white text-black p-4 shadow-lg z-50">
       <div className="container mx-auto flex justify-between items-center">
@@ -32,6 +34,11 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
+
+        <select value={language} onChange={(e) => setLanguage(e.target.value)} className="hidden lg:block px-3 ml-8 border rounded-md bg-white hover:border-blue-500 transition duration-300">
+          <option value="ko">한국어</option>
+          <option value="en">영어</option>
+        </select>
       </div>
     </nav>
   )
