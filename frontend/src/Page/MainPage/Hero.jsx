@@ -1,4 +1,5 @@
 import React from "react"
+import HeroImage from "../../assets/Image1.jpg"
 
 const Hero = () => {
   return (
@@ -22,12 +23,29 @@ const Hero = () => {
               </button>
             </div>
           </div>
-          <div className="flex-1 w-full max-w-s2xl lg:max-w-none">
+          <div className="flex-1 w-full max-w-2xl lg:max-w-none">
             <div className="relative">
-              <img src={} className="relative rounded-2xl shadow-2xl w-full object-cover transform hover:scale-[1.02] transition-transform duration-300" />
+              <img
+                src={HeroImage}
+                className="relative rounded-2xl shadow-2xl w-full object-cover transform hover:scale-[1.02] transition-transform duration-300"
+              />
             </div>
-
           </div>
+        </div>
+      </div>
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          {[
+            { number: "1,200+", label: "설치 완료" },
+            { number: "98%", label: "고객 만족도" },
+            { number: "15년+", label: "업계 경력" },
+            { number: "24/7", label: "기술 지원" },
+          ].map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="text-3xl font-bold text-blue-600">{stat.number}</div>
+              <div className="text-gray-900">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
