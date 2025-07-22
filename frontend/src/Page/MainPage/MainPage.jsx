@@ -2,8 +2,8 @@ import React from 'react'
 
 const MainPage = () => {
   return (
-    <div>
-      
+    <div className='py-32'>
+      MainPage
     </div>
   )
 }
