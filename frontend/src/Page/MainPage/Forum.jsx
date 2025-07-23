@@ -83,6 +83,7 @@ const Forum = () => {
                     <h3 className="text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300">
                       {post.title}
                     </h3>
+                    <div className="mt-2 text-gray-500">{post.createdAt}</div>
                   </div>
                 </div>
               </div>
