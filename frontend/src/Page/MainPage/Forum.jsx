@@ -46,7 +46,7 @@ const Forum = () => {
   ]
 
   return (
-    <div className="bg-white">
+    <div className="bg-white py-20 lg:py-40">
       <div className="container mx-auto px-4 py-28 lg:py-0 max-w-6xl">
         <div className="text-center mb-6">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">업무 게시판</h2>
