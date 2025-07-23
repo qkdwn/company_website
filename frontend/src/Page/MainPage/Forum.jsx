@@ -59,6 +59,15 @@ const Forum = () => {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             전체보기
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </Link>
         </div>
 
@@ -84,6 +93,17 @@ const Forum = () => {
                       {post.title}
                     </h3>
                     <div className="mt-2 text-gray-500">{post.createdAt}</div>
+                  </div>
+                  <div className="ml-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-blue-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </div>
               </div>
