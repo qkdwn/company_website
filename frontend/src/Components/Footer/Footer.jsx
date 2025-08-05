@@ -20,7 +20,7 @@ const Footer = () => {
 
           <div>
             <h3 className="text-xl font-bold mb-4">빠른 링크</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 just">
               <li>
                 <Link to="/" onClick={scrollToTop} className="hover:text-white transition-colors">
                   홈
@@ -63,8 +63,8 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h3 className="text-xl font-bold mb-4">소셜 미디어</h3>
-            <div className="flex space-x-4">
+            <h3 className="text-xl font-bold mb-4 ">소셜 미디어</h3>
+            <div className="flex space-x-4 justify-center">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 <FaFacebook />
               </a>
