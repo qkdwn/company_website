@@ -47,6 +47,7 @@ const NavBar = () => {
         >
           <option value="ko">한국어</option>
           <option value="en">English</option>
+          <option value="cn">中文</option>
         </select>
 
         <button className="lg:hidden text-2xl" onClick={toggleMenu} aria-label="메뉴">
@@ -82,6 +83,7 @@ const NavBar = () => {
           >
             <option value="ko">한국어</option>
             <option value="en">English</option>
+            <option value="cn">中文</option>
           </select>
         </div>
       </div>
