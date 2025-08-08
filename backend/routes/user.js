@@ -93,6 +93,7 @@ router.post("/login", async (req, res) => {
     delete userWithoutPassword.password
 
     res.json({ user: userWithoutPassword })
+    
   } catch (error) {
     console.error("서버 오류:", error.message)
     res.status(500).json({ message: "서버 오류가 발생했습니다." })
