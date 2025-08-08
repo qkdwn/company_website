@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    createAt: {
+    createdAt: {
       type: Date,
       default: Date.now,
     },
@@ -43,6 +43,6 @@ const userSchema = new mongoose.Schema(
   }
 )
 
-const User = mongoose.model.model("User", userSchema)
+const User = mongoose.model("User", userSchema)
 
 module.exports = User
