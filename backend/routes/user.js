@@ -86,7 +86,7 @@ router.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: "production",
+      secure: false,
       sameSite: "strict",
       maxAge: 24 * 60 * 60 * 1000,
     })
@@ -123,13 +123,25 @@ router.post("/logout", async (req, res) => {
 
     res.clearCookie("token", {
       httpOnly: true,
-      secure: "production",
+      secure: false,
       sameSite: "strict",
     })
 
-    res.json({ message: "로그아웃이 완료되었습니다." })
+    res.json({ message: "로그아웃되었습니다." })
   } catch (error) {
-    console.error("로그아웃 오류: ", error.message)
+    console.log("로그아웃 오류: ", error.message)
+    res.status(500).json({ message: "서버 오류가 발생했습니다." })
+  }
+})
+
+router.delete("delete/:userId", async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.userId)
+    if (!user) {
+      return res.status(404).json({ message: "사용자를 찾을 수 없습니다." })
+    }
+    res.json({ message: "사용자가 성공적으로 삭제되었습니다." })
+  } catch (error) {
     res.status(500).json({ message: "서버 오류가 발생했습니다." })
   }
 })
