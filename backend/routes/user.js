@@ -93,9 +93,41 @@ router.post("/login", async (req, res) => {
     delete userWithoutPassword.password
 
     res.json({ user: userWithoutPassword })
-    
   } catch (error) {
     console.error("서버 오류:", error.message)
+    res.status(500).json({ message: "서버 오류가 발생했습니다." })
+  }
+})
+
+router.post("/logout", async (req, res) => {
+  try {
+    const token = req.cookies.token
+
+    if (!token) {
+      return res.status(400).json({ message: "이미 로그아웃된 상태입니다." })
+    }
+
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET)
+      const user = await User.findById(decoded.userId)
+
+      if (user) {
+        user.isLoggedIn = false
+        await user.save()
+      }
+    } catch (error) {
+      console.log("토큰 검증 오류: ", error.message)
+    }
+
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: "production",
+      sameSite: "strict",
+    })
+
+    res.json({ message: "로그아웃이 완료되었습니다." })
+  } catch (error) {
+    console.error("로그아웃 오류: ", error.message)
     res.status(500).json({ message: "서버 오류가 발생했습니다." })
   }
 })
