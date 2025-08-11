@@ -34,6 +34,7 @@ router.post("/login", async (req, res) => {
     const { username, password } = req.body
 
     const user = await User.findOne({ username }).select("+password")
+
     if (!user) {
       return res.status(401).json({ message: "사용자를 찾을 수 없습니다." })
     }
@@ -70,13 +71,13 @@ router.post("/login", async (req, res) => {
     user.lastLoginAttempt = new Date()
     user.isLoggedIn = true
 
-    try {
-      const response = await axios.get("https://api.ipify.org?format=json")
-      const ipAddress = response.data.ip
-      user.ipAddress = ipAddress
-    } catch (ipError) {
-      console.error("IP 주소를 가져오는 중 오류 발생:", ipError.message)
-    }
+    // try {
+    //   const response = await axios.get("https://api.ipify.org?format=json");
+    //   const ipAddress = response.data.ip;
+    //   user.ipAddress = ipAddress;
+    // } catch (error) {
+    //   console.log("IP 주소를 가져오던 중 오류 발생: ", error.message);
+    // }
 
     await user.save()
 
@@ -96,7 +97,7 @@ router.post("/login", async (req, res) => {
 
     res.json({ user: userWithoutPassword })
   } catch (error) {
-    console.error("서버 오류:", error.message)
+    console.log("서버 오류: ", error.message)
     res.status(500).json({ message: "서버 오류가 발생했습니다." })
   }
 })
@@ -123,7 +124,7 @@ router.post("/logout", async (req, res) => {
 
     res.clearCookie("token", {
       httpOnly: true,
-      secure: false,
+      secure: "production",
       sameSite: "strict",
     })
 
@@ -134,7 +135,7 @@ router.post("/logout", async (req, res) => {
   }
 })
 
-router.delete("delete/:userId", async (req, res) => {
+router.delete("/delete/:userId", async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.userId)
     if (!user) {
