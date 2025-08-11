@@ -1,18 +1,18 @@
-import "./App.css";
+import "./App.css"
 
-import Footer from "./Components/Footer/Footer";
-import Navbar from "./Components/Navbar/Navbar";
+import Footer from "./Components/Footer/Footer"
+import Navbar from "./Components/Navbar/Navbar"
 
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"
 
-import MainPage from "./Page/MainPage/MainPage";
-import About from "./Page/About/About";
-import Leadership from "./Page/Leadership/Leadership";
-import Board from "./Page/Board/Board";
-import Services from "./Page/Services/Services";
-import Contact from "./Page/Contact/Contact";
+import MainPage from "./Page/MainPage/MainPage"
+import About from "./Page/About/About"
+import Leadership from "./Page/Leadership/Leadership"
+import Board from "./Page/Board/Board"
+import Services from "./Page/Services/Services"
+import Contact from "./Page/Contact/Contact"
 
-import AdminLogin from "./Page/Admin/AdminLogin";
+import AdminLogin from "./Page/Admin/AdminLogin"
 
 function Layout() {
   return (
@@ -21,7 +21,7 @@ function Layout() {
       <Outlet />
       <Footer />
     </>
-  );
+  )
 }
 
 const router = createBrowserRouter([
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MainPage />
+        element: <MainPage />,
       },
       {
         path: "/about",
@@ -52,17 +52,17 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
-      }
-    ]
+      },
+    ],
   },
   {
-    path:"/admin",
-    element: <AdminLogin />
+    path: "/admin",
+    element: <AdminLogin />,
   },
 ])
 
 function App() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />
 }
 
-export default App;
+export default App
