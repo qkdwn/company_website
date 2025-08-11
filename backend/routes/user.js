@@ -71,14 +71,6 @@ router.post("/login", async (req, res) => {
     user.lastLoginAttempt = new Date()
     user.isLoggedIn = true
 
-    // try {
-    //   const response = await axios.get("https://api.ipify.org?format=json");
-    //   const ipAddress = response.data.ip;
-    //   user.ipAddress = ipAddress;
-    // } catch (error) {
-    //   console.log("IP 주소를 가져오던 중 오류 발생: ", error.message);
-    // }
-
     await user.save()
 
     const token = jwt.sign({ userId: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: "24h" })
