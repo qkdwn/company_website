@@ -26,6 +26,7 @@ const AdminLogin = () => {
       const response = await axios.post("http://localhost:3000/api/auth/login", formData, {
         withCredentials: true,
       })
+
       if (response.data.user) {
         navigate("/admin/posts")
       }
@@ -39,6 +40,7 @@ const AdminLogin = () => {
       })
     }
   }
+
   return (
     <div className="min-h-screen bg-white flex items-center justify-center px-4">
       <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-2xl shadow-xl">
@@ -50,7 +52,7 @@ const AdminLogin = () => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
-              <label htmlFor="userName" className="block text-xm font-medium text-gray-700">
+              <label htmlFor="username" className="block text-xm font-medium text-gray-700">
                 관리자 아이디
               </label>
               <input
@@ -61,7 +63,7 @@ const AdminLogin = () => {
                 value={formData.username}
                 onChange={handleChange}
                 className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300"
-                placeholder="관리자아이디"
+                placeholder="관리자 아이디"
               />
             </div>
             <div>
@@ -73,7 +75,7 @@ const AdminLogin = () => {
                 name="password"
                 type="password"
                 required
-                value={formData.userpassword}
+                value={formData.password}
                 onChange={handleChange}
                 className="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-300"
                 placeholder="관리자 비밀번호"
@@ -83,12 +85,13 @@ const AdminLogin = () => {
 
           {error && (
             <div className="bg-red-50 text-red-500 p-4 rounded-lg text-base font-bold text-center">
-              {typeof error == "string" ? error : error.message}
+              {typeof error === "string" ? error : error.message}
               {error.remainingAttempts !== undefined && (
-                <div className="mt-1">남은 시도 횟수: {error.remainingAttempts}</div>
+                <div className="mt-1">남은 시도 횟수: {error.remainingAttempts}회</div>
               )}
             </div>
           )}
+
           <button
             type="submit"
             className="w-full items-center px-4 py-3 border-transparent rounded-lg text-white bg-blue-600 hover:bg-blue-700 font-medium transition-colors duration-300"
