@@ -39,7 +39,6 @@ router.post("/", async (req, res) => {
   }
 })
 
-/*get endpoint */
 router.get("/", async (req, res) => {
   try {
     const contacts = await Contact.find().sort({ createdAt: -1 })
@@ -57,6 +56,37 @@ router.get("/:id", async (req, res) => {
       return res.status(404).json({ message: "문의를 찾을 수 없습니다." })
     }
     res.json(contact)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "서버 에러가 발생했습니다." })
+  }
+})
+
+router.put("/:id", async (req, res) => {
+  try {
+    const { status } = req.body
+
+    const contact = await Contact.findByIdAndUpdate(req.params.id, { status }, { new: true })
+
+    if (!contact) {
+      return res.status(404).json({ message: "문의를 찾을 수 없습니다." })
+    }
+
+    res.json({ message: "문의 상태가 성공적으로 수정되었습니다.", contact })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "서버 에러가 발생했습니다." })
+  }
+})
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const contact = await Contact.findByIdAndDelete(req.params.id)
+
+    if (!contact) {
+      return res.status(404).json({ message: "문의를 찾을 수 없습니다." })
+    }
+    res.json({ message: "문의가 성공적으로 삭제되었습니다." })
   } catch (error) {
     console.log(error)
     res.status(500).json({ message: "서버 에러가 발생했습니다." })
