@@ -39,6 +39,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+/*get endpoint */
 router.get("/", async (req, res) => {
   try {
     const contacts = await Contact.find().sort({ createdAt: -1 });
