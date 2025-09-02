@@ -1,32 +1,36 @@
-import React from "react"
+import React, { useState, useEffect, useMemo } from "react"
 
 const AdminContacts = () => {
-  const contacts = [
-    {
-      id: 1,
-      name: "홍길동",
-      email: "hong@example.com",
-      phone: "010-1234-5678",
-      message: "상품에 대한 문의입니다.",
-      status: "대기중",
-    },
-    {
-      id: 2,
-      name: "이영희",
-      email: "lee@example.com",
-      phone: "010-8765-4321",
-      message: "환불 요청합니다.",
-      status: "진행중",
-    },
-    {
-      id: 3,
-      name: "박철수",
-      email: "park@example.com",
-      phone: "010-0000-1111",
-      message: "연락이 지연되고 있습니다.",
-      status: "완료",
-    },
-  ]
+  const [contacts, setContacts] = useState([])
+
+  const [selectContact, setSelectContact] = useState(null)
+  const [searchTerm, setSearchTerm] = useState("")
+  const [searchType, setSearchType] = useState("name")
+  const [statusFilter, setStatusFilter] = useState("all")
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/contact", {
+          withCredentials: true,
+        })
+
+        setContacts(response.data)
+      } catch (error) {
+        console.log("문의글 가져오기 실패: ", error)
+      }
+    }
+
+    fetchContacts()
+  }, [])
+  const filteredContacts = useMemo(() => {
+    return contact.filter((contact) => {
+      const value = contact[searchType].toLowerCase() || ""
+      const matchesSearch = value.includes(searchTerm.toLowerCase())
+      const matchesStatus = statusFilter === "all" || contact.status === statusFilter
+      return matchSearch && matchesStatus
+    })
+  }, [contacts, searchTerm, searchType, statusFilter])
 
   return (
     <div className="p-4 mx-auto max-w-[1400px]">
@@ -34,7 +38,11 @@ const AdminContacts = () => {
 
       <div className="mb-4 flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex w-full md:w-auto gap-2">
-          <select className="border rounded px-3 py-2 text-base">
+          <select
+            className="border rounded px-3 py-2 text-base "
+            value={searchType}
+            onChange={(e) => setSearchType(e.target.value)}
+          >
             <option value="name">이름</option>
             <option value="email">이메일</option>
             <option value="phone">연락처</option>
@@ -45,9 +53,15 @@ const AdminContacts = () => {
               type="text"
               placeholder="검색어를 입력하세요."
               className="w-full border rounded px-3 py-2 text-base"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <select className="border rounded px-3 py-2 text-base">
+          <select
+            className="border rounded px-3 py-2 text-base"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
             <option value="all">전체 상태</option>
             <option value="pending">대기중</option>
             <option value="in progress">진행중</option>
