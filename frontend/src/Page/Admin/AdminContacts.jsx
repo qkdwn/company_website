@@ -24,11 +24,11 @@ const AdminContacts = () => {
     fetchContacts()
   }, [])
   const filteredContacts = useMemo(() => {
-    return contact.filter((contact) => {
+    return contacts.filter((contact) => {
       const value = contact[searchType].toLowerCase() || ""
       const matchesSearch = value.includes(searchTerm.toLowerCase())
       const matchesStatus = statusFilter === "all" || contact.status === statusFilter
-      return matchSearch && matchesStatus
+      return matchesSearch && matchesStatus
     })
   }, [contacts, searchTerm, searchType, statusFilter])
 
